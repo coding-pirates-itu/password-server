@@ -1,0 +1,24 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Password list";
+}
+
+<h1 class="display-4">@ViewData["Title"]</h1>
+
+<table class="table table-striped">
+    <tr class="row">
+        <th class="col-3">Destination</th>
+        <th class="col-4">User name</th>
+        <th class="col-5">Password</th>
+    </tr>
+
+    @foreach (var pwd in Model.Passwords)
+    {
+        <tr class="row">
+            <td class="col-3">@pwd.Destination</td>
+            <td class="col-4">@pwd.UserName</td>
+            <td class="col-5">@pwd.Password</td>
+        </tr>
+    }
+</table>
