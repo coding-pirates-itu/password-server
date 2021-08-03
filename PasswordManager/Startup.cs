@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+
 
 namespace PasswordManager
 {
@@ -25,6 +27,12 @@ namespace PasswordManager
             services.AddSingleton<IPasswordService>(new PasswordService());
             services.AddRazorPages();
             services.AddApplicationInsightsTelemetry();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Password manager API", Version = "v1" });
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "PasswordManager.xml");
+                c.IncludeXmlComments(filePath);
+            });
         }
 
 
@@ -40,14 +48,16 @@ namespace PasswordManager
             }
 
             app.UseStaticFiles();
-
             app.UseRouting();
-
+            app.UseSwagger();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+            });
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("v1/swagger.json", "Password Manager API V1");
             });
         }
     }
