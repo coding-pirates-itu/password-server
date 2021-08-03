@@ -50,6 +50,7 @@ namespace PasswordManager
             }
 
             app.UseStaticFiles();
+            app.UseMvc();
             app.UseRouting();
             app.UseSwagger();
             app.UseAuthorization();
