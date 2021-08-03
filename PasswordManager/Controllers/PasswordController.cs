@@ -16,6 +16,13 @@ namespace PasswordManager.Controllers
         }
 
 
+        [HttpGet]
+        public IActionResult GetPasswords()
+        {
+            return Ok(mPasswords.GetPasswords());
+        }
+
+
         [HttpPost]
         public IActionResult AddPassword(PasswordViewModel password)
         {
