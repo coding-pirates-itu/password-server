@@ -26,8 +26,8 @@ namespace PasswordManager
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IPasswordService>(new PasswordService());
+            services.AddControllers();
             services.AddRazorPages();
-            services.AddMvc();
             services.AddApplicationInsightsTelemetry();
             services.AddSwaggerGen(c =>
             {
@@ -50,12 +50,12 @@ namespace PasswordManager
             }
 
             app.UseStaticFiles();
-            app.UseMvc();
             app.UseRouting();
             app.UseSwagger();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
             app.UseSwaggerUI(c =>
