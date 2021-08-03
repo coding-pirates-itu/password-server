@@ -27,7 +27,7 @@ namespace PasswordManager
         {
             services.AddSingleton<IPasswordService>(new PasswordService());
             services.AddRazorPages();
-            service.AddMvc();
+            services.AddMvc();
             services.AddApplicationInsightsTelemetry();
             services.AddSwaggerGen(c =>
             {
